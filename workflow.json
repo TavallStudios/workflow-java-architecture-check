@@ -1,0 +1,26 @@
+{
+  "workflowId": "java-architecture-check",
+  "name": "Java Architecture Check",
+  "version": "1.0.0",
+  "summary": "Runs java_gate quick (advisory) plus the canonical CLI architecture rule against a repository worktree and returns one typed report.",
+  "notice": "This is a source descriptor referencing the owner-defined execution contract. It defines no new workflow manifest format and makes no claim of a deployed Workflows runtime or MCP endpoint.",
+  "contract": {
+    "type": "IWorkflowRunner",
+    "declaredIn": "TavallStudios/tavall-workflows :: workflows-api",
+    "implementation": "TavallStudios/tavall-workflows :: workflows-cli :: JavaArchitectureValidationRunner",
+    "invoke": "tavall workflow run java-architecture-check --worktree <path> --base <ref>",
+    "discovery": "META-INF/services/org.tavall.cli.api.bootstrap.ICLIBootstrap"
+  },
+  "checks": [
+    { "name": "java-gate-quick", "kind": "advisory" },
+    { "name": "architecture-rules/tavall-cli", "kind": "validation" }
+  ],
+  "sourceRepository": "https://github.com/TavallStudios/tavall-workflows",
+  "verification": {
+    "pullRequest": "https://github.com/TavallStudios/tavall-workflows/pull/23",
+    "mergedSha": "016c1b5ef2da25b96218a091749f58b87a6e4347",
+    "gateHeadSha": "c0fadf32def7a929c779ec168b895eec649dd574",
+    "result": "Staging fast path PASS at c0fadf3: exact-head compile, :workflows-cli module tests (11 passed), and real `tavall workflow run` CLI e2e (PASS, 2 checks). No full CI."
+  },
+  "license": "Apache-2.0"
+}
